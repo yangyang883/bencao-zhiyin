@@ -1,0 +1,7 @@
+'use client'
+import { useEffect,useState } from 'react'
+import Link from 'next/link'
+import { PageShell } from '@/components/page-shell'
+import { getUserProfile,constitutionTypes,determineConstitutionType,type UserProfile } from '@/lib/user-store'
+export default function ConstitutionPage(){const [user,setUser]=useState<UserProfile|null>(null);useEffect(()=>setUser(getUserProfile()),[]);const result=user?.constitution;const info=result?constitutionTypes[result.type]:null;const scores=result?determineConstitutionType(result.answers.map(a=>({questionId:a.questionId,optionValue:a.answer}))).allScores:{};
+ return <PageShell title="体质详情">{result?<><section className="bg-card border rounded-xl p-5"><h2 className="text-xl">{result.type}</h2><p className="mt-3">{info?.description}</p><p className="text-sm mt-3">评估时间：{new Date(result.analyzedAt).toLocaleString('zh-CN')}</p></section><section className="bg-card border rounded-xl p-5"><h2 className="font-semibold mb-3">问卷原始得分</h2>{Object.entries(scores).map(([type,score])=><p key={type} className="flex justify-between py-1"><span>{type}</span><span>{score} 分</span></p>)}</section><section className="space-y-2">{info?.advice.map(item=><p key={item}>• {item}</p>)}</section></>:<p>尚无体质评估记录，请先完成问卷。</p>}<p className="text-sm text-muted-foreground">本问卷为作品中的健康参考问卷，不能替代医学诊断。</p><Link href="/login" className="inline-block border rounded-lg p-3">填写或重新评估</Link></PageShell>}

@@ -1,0 +1,146 @@
+[
+  {
+    "case": "sample2",
+    "status": 200,
+    "expected_status": 200,
+    "passed": true,
+    "seconds": 9.29,
+    "result": {
+      "source": "local-qwen-vl",
+      "tongueColor": "淡红",
+      "tongueShape": "胖大；未见明显齿痕；未见明显裂纹",
+      "coating": "白；薄；未见明显腻腐外观；未见明显剥苔",
+      "constitution": "仅凭照片无法判断体质",
+      "details": [
+        {
+          "category": "舌体颜色",
+          "status": "待人工核对",
+          "description": "淡红。观察舌体，不把白色舌苔当成淡白舌；光线和染色会影响颜色。"
+        },
+        {
+          "category": "舌体形状",
+          "status": "待人工核对",
+          "description": "胖大。伸舌力度和拍摄角度会改变外观。"
+        },
+        {
+          "category": "齿痕",
+          "status": "待人工核对",
+          "description": "未见明显齿痕。观察舌缘连续的凹陷；边缘看不清则不判断。"
+        },
+        {
+          "category": "裂纹",
+          "status": "待人工核对",
+          "description": "未见明显裂纹。观察舌面沟裂，不把反光或阴影直接算作裂纹。"
+        },
+        {
+          "category": "苔色",
+          "status": "待人工核对",
+          "description": "白。苔色与舌体颜色分开记录。"
+        },
+        {
+          "category": "苔厚薄",
+          "status": "待人工核对",
+          "description": "薄。以舌体是否容易透见作为观察线索，图片不能触诊。"
+        },
+        {
+          "category": "苔质",
+          "status": "待人工核对",
+          "description": "未见明显腻腐外观。只描述细密或粗松外观，不能用照片验证刮除情况。"
+        },
+        {
+          "category": "剥苔",
+          "status": "待人工核对",
+          "description": "未见明显剥苔。记录局部缺苔外观，不自动推断病因。"
+        }
+      ],
+      "suggestions": [
+        "拍摄舌面近照，完整保留舌尖和两侧舌缘，避免整张人脸占据主要画面。",
+        "在均匀光线下自然伸舌，确认对焦清晰；记录近期饮食和刷舌情况，避免把染色当成苔色。",
+        "逐项对照原图核验；无法判断的项目不要当成正常，可补拍后再观察。",
+        "以上为通用视觉模型外观试验，尚未用专家标注数据验证准确率；单张照片不评估动态舌态、触感或未拍摄的舌下络脉，不据此诊断或开药。"
+      ]
+    }
+  },
+  {
+    "case": "sample3",
+    "status": 200,
+    "expected_status": 200,
+    "passed": true,
+    "seconds": 9.11,
+    "result": {
+      "source": "local-qwen-vl",
+      "tongueColor": "淡红",
+      "tongueShape": "胖大；未见明显齿痕；未见明显裂纹",
+      "coating": "白；厚；未见明显腻腐外观；未见明显剥苔",
+      "constitution": "仅凭照片无法判断体质",
+      "details": [
+        {
+          "category": "舌体颜色",
+          "status": "待人工核对",
+          "description": "淡红。观察舌体，不把白色舌苔当成淡白舌；光线和染色会影响颜色。"
+        },
+        {
+          "category": "舌体形状",
+          "status": "待人工核对",
+          "description": "胖大。伸舌力度和拍摄角度会改变外观。"
+        },
+        {
+          "category": "齿痕",
+          "status": "待人工核对",
+          "description": "未见明显齿痕。观察舌缘连续的凹陷；边缘看不清则不判断。"
+        },
+        {
+          "category": "裂纹",
+          "status": "待人工核对",
+          "description": "未见明显裂纹。观察舌面沟裂，不把反光或阴影直接算作裂纹。"
+        },
+        {
+          "category": "苔色",
+          "status": "待人工核对",
+          "description": "白。苔色与舌体颜色分开记录。"
+        },
+        {
+          "category": "苔厚薄",
+          "status": "待人工核对",
+          "description": "厚。以舌体是否容易透见作为观察线索，图片不能触诊。"
+        },
+        {
+          "category": "苔质",
+          "status": "待人工核对",
+          "description": "未见明显腻腐外观。只描述细密或粗松外观，不能用照片验证刮除情况。"
+        },
+        {
+          "category": "剥苔",
+          "status": "待人工核对",
+          "description": "未见明显剥苔。记录局部缺苔外观，不自动推断病因。"
+        }
+      ],
+      "suggestions": [
+        "拍摄舌面近照，完整保留舌尖和两侧舌缘，避免整张人脸占据主要画面。",
+        "在均匀光线下自然伸舌，确认对焦清晰；记录近期饮食和刷舌情况，避免把染色当成苔色。",
+        "逐项对照原图核验；无法判断的项目不要当成正常，可补拍后再观察。",
+        "以上为通用视觉模型外观试验，尚未用专家标注数据验证准确率；单张照片不评估动态舌态、触感或未拍摄的舌下络脉，不据此诊断或开药。"
+      ]
+    }
+  },
+  {
+    "case": "blank",
+    "status": 503,
+    "expected_status": 503,
+    "passed": true,
+    "seconds": 0.03,
+    "result": {
+      "error": "图片接近纯色或没有可辨细节，请重新拍摄"
+    }
+  },
+  {
+    "case": "shapes",
+    "status": 503,
+    "expected_status": 503,
+    "passed": true,
+    "seconds": 5.55,
+    "result": {
+      "error": "图片不适合细分类，请上传清晰、完整的舌面照片"
+    }
+  }
+]

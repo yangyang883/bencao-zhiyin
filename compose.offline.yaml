@@ -1,0 +1,11 @@
+# Linux / Jetson: Python service and Ollama run on the host loopback interface.
+services:
+  bencao:
+    image: bencao-device:offline-20260924
+    network_mode: host
+    environment:
+      BENCAO_MODE: offline
+      HOSTNAME: 127.0.0.1
+      PORT: "3100"
+      NEXT_TELEMETRY_DISABLED: "1"
+    restart: unless-stopped

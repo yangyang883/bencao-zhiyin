@@ -1,0 +1,10 @@
+{
+  "version": "2026-09-27.1",
+  "review": "已核对公开来源；项目中文摘要与组合规则尚未经过临床专家审核，不是诊疗指南或医疗分诊系统。",
+  "entries": [
+    {"id":"oral-care","title":"舌部不适的一般护理","summary":"使用软毛牙刷，避免辛辣、酸性及过烫食物饮品，避免烟酒刺激。疼痛持续或加重，或自己观察到口内白色斑块时，应找医生或牙医检查，不自行判断病因。","sourceTitle":"NHS — Sore or white tongue","url":"https://www.nhs.uk/symptoms/sore-or-white-tongue/","checkedAt":"2026-09-27","use":"用户确认舌痛；一般口腔护理。模型白苔标签不等于用户确认的白斑。"},
+    {"id":"dry-mouth","title":"口干的日常处理","summary":"能正常吞咽、且没有医生限水要求时，可少量多次饮水，注意口腔清洁。不要因怀疑药物导致口干就自行停药。持续口干、影响吃饭说话或伴其他不适时应就医。","sourceTitle":"NHS — Dry mouth","url":"https://www.nhs.uk/symptoms/dry-mouth/","checkedAt":"2026-09-27","use":"用户确认口干；饮水建议附吞咽能力和既有医嘱条件。"},
+    {"id":"ulcer","title":"口腔溃疡的复核时机","summary":"口腔溃疡超过三周仍未好，应由医生或牙医检查；出血、变得更红或更疼也应检查。不要凭舌象图片判断溃疡病因。","sourceTitle":"NHS — Mouth ulcers","url":"https://www.nhs.uk/conditions/mouth-ulcers/","checkedAt":"2026-09-27","use":"用户确认存在溃疡，并单独填写该溃疡持续天数。"},
+    {"id":"emergency","title":"呼吸困难或突然肿胀优先求助","summary":"出现呼吸困难，或嘴唇、舌头、咽喉突然肿胀，应立即寻求急救，不等待照片分析。中国大陆拨打120；其他地区使用当地急救电话。","sourceTitle":"NHS — Anaphylaxis；北京市应急管理局 — 呼吸困难者的急救措施","url":"https://www.nhs.uk/conditions/anaphylaxis/","additionalUrl":"https://yjglj.beijing.gov.cn/art/2020/7/31/art_3938_243632.html","checkedAt":"2026-09-27","use":"由用户当前症状确认触发；图片中的胖大舌不自动触发突然肿胀判断。"}
+  ]
+}

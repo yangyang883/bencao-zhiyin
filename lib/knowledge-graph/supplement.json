@@ -1,0 +1,530 @@
+{
+  "version": "2026-09-20",
+  "sources": {
+    "health": "https://www.nhc.gov.cn/xcs/c100123/202405/73a4927142f34152abed875634a3c13b.shtml",
+    "tcm": "https://www.nccih.nih.gov/health/traditional-chinese-medicine-what-you-need-to-know",
+    "sleep": "https://www.nhlbi.nih.gov/health/sleep-deprivation/healthy-sleep-habits",
+    "constipation": "https://www.niddk.nih.gov/health-information/digestive-diseases/constipation/treatment",
+    "reflux": "https://www.niddk.nih.gov/health-information/digestive-diseases/acid-reflux-ger-gerd-adults/eating-diet-nutrition",
+    "symptoms": "https://medlineplus.gov/symptoms.html"
+  },
+  "additions": {
+    "symptoms": [
+      {
+        "id": "sym_cough",
+        "name": "咳嗽",
+        "type": "symptom",
+        "aliases": [
+          "咳",
+          "干咳"
+        ],
+        "description": "将气道中的空气快速排出的表现，不能仅凭咳嗽判断感染类型。",
+        "properties": {
+          "观察要点": "起始时间、昼夜差异、有无痰、是否接触烟尘",
+          "记录方式": "写下出现时间、持续多久、影响活动的程度和伴随情况；就诊时携带记录。",
+          "使用边界": "仅帮助描述和检索症状；持续、加重或明显影响生活时请就医。",
+          "资料性质": "症状教育条目，非诊断标准",
+          "参考入口": "https://medlineplus.gov/symptoms.html"
+        }
+      },
+      {
+        "id": "sym_sputum",
+        "name": "咳痰",
+        "type": "symptom",
+        "aliases": [
+          "有痰",
+          "痰多"
+        ],
+        "description": "咳嗽时排出呼吸道分泌物；颜色本身不能决定是否需要抗生素。",
+        "properties": {
+          "观察要点": "痰量、颜色、黏稠程度及是否带血",
+          "记录方式": "写下出现时间、持续多久、影响活动的程度和伴随情况；就诊时携带记录。",
+          "使用边界": "仅帮助描述和检索症状；持续、加重或明显影响生活时请就医。",
+          "资料性质": "症状教育条目，非诊断标准",
+          "参考入口": "https://medlineplus.gov/symptoms.html"
+        }
+      },
+      {
+        "id": "sym_sore_throat",
+        "name": "咽痛",
+        "type": "symptom",
+        "aliases": [
+          "嗓子疼",
+          "喉咙痛"
+        ],
+        "description": "咽喉疼痛或吞咽时不适。",
+        "properties": {
+          "观察要点": "是否发热、吞咽困难、声音改变及持续时间",
+          "记录方式": "写下出现时间、持续多久、影响活动的程度和伴随情况；就诊时携带记录。",
+          "使用边界": "仅帮助描述和检索症状；持续、加重或明显影响生活时请就医。",
+          "资料性质": "症状教育条目，非诊断标准",
+          "参考入口": "https://medlineplus.gov/symptoms.html"
+        }
+      },
+      {
+        "id": "sym_nasal_obstruction",
+        "name": "鼻塞",
+        "type": "symptom",
+        "aliases": [
+          "鼻子不通"
+        ],
+        "description": "鼻腔通气不畅的主观感受。",
+        "properties": {
+          "观察要点": "单侧或双侧、接触环境、昼夜变化",
+          "记录方式": "写下出现时间、持续多久、影响活动的程度和伴随情况；就诊时携带记录。",
+          "使用边界": "仅帮助描述和检索症状；持续、加重或明显影响生活时请就医。",
+          "资料性质": "症状教育条目，非诊断标准",
+          "参考入口": "https://medlineplus.gov/symptoms.html"
+        }
+      },
+      {
+        "id": "sym_sneezing",
+        "name": "打喷嚏",
+        "type": "symptom",
+        "aliases": [
+          "喷嚏"
+        ],
+        "description": "鼻腔受到刺激后出现的反射动作。",
+        "properties": {
+          "观察要点": "是否伴鼻痒、流涕以及接触花粉或灰尘的情况",
+          "记录方式": "写下出现时间、持续多久、影响活动的程度和伴随情况；就诊时携带记录。",
+          "使用边界": "仅帮助描述和检索症状；持续、加重或明显影响生活时请就医。",
+          "资料性质": "症状教育条目，非诊断标准",
+          "参考入口": "https://medlineplus.gov/symptoms.html"
+        }
+      },
+      {
+        "id": "sym_heartburn",
+        "name": "反酸烧心",
+        "type": "symptom",
+        "aliases": [
+          "反酸",
+          "烧心",
+          "胃酸上来"
+        ],
+        "description": "口中出现酸味或胸骨后烧灼感，是症状描述而不是确定诊断。",
+        "properties": {
+          "观察要点": "与进食、平卧的关系；是否吞咽不适",
+          "记录方式": "写下出现时间、持续多久、影响活动的程度和伴随情况；就诊时携带记录。",
+          "使用边界": "仅帮助描述和检索症状；持续、加重或明显影响生活时请就医。",
+          "资料性质": "症状教育条目，非诊断标准",
+          "参考入口": "https://medlineplus.gov/symptoms.html"
+        }
+      },
+      {
+        "id": "sym_nausea",
+        "name": "恶心",
+        "type": "symptom",
+        "aliases": [
+          "想吐",
+          "反胃"
+        ],
+        "description": "有想要呕吐的感觉，可与多种情况有关。",
+        "properties": {
+          "观察要点": "进食、服药、旅行及妊娠可能性",
+          "记录方式": "写下出现时间、持续多久、影响活动的程度和伴随情况；就诊时携带记录。",
+          "使用边界": "仅帮助描述和检索症状；持续、加重或明显影响生活时请就医。",
+          "资料性质": "症状教育条目，非诊断标准",
+          "参考入口": "https://medlineplus.gov/symptoms.html"
+        }
+      },
+      {
+        "id": "sym_vomiting",
+        "name": "呕吐",
+        "type": "symptom",
+        "aliases": [
+          "吐了"
+        ],
+        "description": "胃内容物从口中排出。",
+        "properties": {
+          "观察要点": "次数、能否喝水及呕吐物颜色",
+          "记录方式": "写下出现时间、持续多久、影响活动的程度和伴随情况；就诊时携带记录。",
+          "使用边界": "仅帮助描述和检索症状；持续、加重或明显影响生活时请就医。",
+          "资料性质": "症状教育条目，非诊断标准",
+          "参考入口": "https://medlineplus.gov/symptoms.html"
+        }
+      },
+      {
+        "id": "sym_diarrhea",
+        "name": "腹泻",
+        "type": "symptom",
+        "aliases": [
+          "拉肚子",
+          "水样便"
+        ],
+        "description": "大便较平时稀、次数增加。",
+        "properties": {
+          "观察要点": "频率、进食史、旅行史及体温",
+          "记录方式": "写下出现时间、持续多久、影响活动的程度和伴随情况；就诊时携带记录。",
+          "使用边界": "仅帮助描述和检索症状；持续、加重或明显影响生活时请就医。",
+          "资料性质": "症状教育条目，非诊断标准",
+          "参考入口": "https://medlineplus.gov/symptoms.html"
+        }
+      },
+      {
+        "id": "sym_belching",
+        "name": "嗳气",
+        "type": "symptom",
+        "aliases": [
+          "打嗝气",
+          "嗳气频繁"
+        ],
+        "description": "气体从胃或食管经口排出；需与连续呃逆区分。",
+        "properties": {
+          "观察要点": "是否进食过快、喝碳酸饮料以及是否反酸",
+          "记录方式": "写下出现时间、持续多久、影响活动的程度和伴随情况；就诊时携带记录。",
+          "使用边界": "仅帮助描述和检索症状；持续、加重或明显影响生活时请就医。",
+          "资料性质": "症状教育条目，非诊断标准",
+          "参考入口": "https://medlineplus.gov/symptoms.html"
+        }
+      },
+      {
+        "id": "sym_itching",
+        "name": "皮肤瘙痒",
+        "type": "symptom",
+        "aliases": [
+          "皮肤痒",
+          "身上痒"
+        ],
+        "description": "皮肤出现想要抓挠的感觉。",
+        "properties": {
+          "观察要点": "皮疹、接触用品、持续时间及是否影响睡眠",
+          "记录方式": "写下出现时间、持续多久、影响活动的程度和伴随情况；就诊时携带记录。",
+          "使用边界": "仅帮助描述和检索症状；持续、加重或明显影响生活时请就医。",
+          "资料性质": "症状教育条目，非诊断标准",
+          "参考入口": "https://medlineplus.gov/symptoms.html"
+        }
+      },
+      {
+        "id": "sym_neck_discomfort",
+        "name": "颈肩不适",
+        "type": "symptom",
+        "aliases": [
+          "肩颈酸",
+          "脖子酸"
+        ],
+        "description": "颈部或肩部酸痛、紧张等不适的统称。",
+        "properties": {
+          "观察要点": "久坐姿势、活动范围、外伤及手臂麻木",
+          "记录方式": "写下出现时间、持续多久、影响活动的程度和伴随情况；就诊时携带记录。",
+          "使用边界": "仅帮助描述和检索症状；持续、加重或明显影响生活时请就医。",
+          "资料性质": "症状教育条目，非诊断标准",
+          "参考入口": "https://medlineplus.gov/symptoms.html"
+        }
+      },
+      {
+        "id": "sym_daytime_sleepiness",
+        "name": "白天嗜睡",
+        "type": "symptom",
+        "aliases": [
+          "白天犯困",
+          "总想睡"
+        ],
+        "description": "白天容易入睡或难以保持清醒。",
+        "properties": {
+          "观察要点": "夜间睡眠时长、打鼾、用药及驾驶时困倦",
+          "记录方式": "写下出现时间、持续多久、影响活动的程度和伴随情况；就诊时携带记录。",
+          "使用边界": "仅帮助描述和检索症状；持续、加重或明显影响生活时请就医。",
+          "资料性质": "症状教育条目，非诊断标准",
+          "参考入口": "https://medlineplus.gov/symptoms.html"
+        }
+      },
+      {
+        "id": "sym_dry_eyes",
+        "name": "眼干",
+        "type": "symptom",
+        "aliases": [
+          "眼睛干涩",
+          "眼睛干"
+        ],
+        "description": "眼部干涩、摩擦感等不适。",
+        "properties": {
+          "观察要点": "屏幕使用时间、隐形眼镜、红痛及视力变化",
+          "记录方式": "写下出现时间、持续多久、影响活动的程度和伴随情况；就诊时携带记录。",
+          "使用边界": "仅帮助描述和检索症状；持续、加重或明显影响生活时请就医。",
+          "资料性质": "症状教育条目，非诊断标准",
+          "参考入口": "https://medlineplus.gov/symptoms.html"
+        }
+      }
+    ],
+    "foods": [
+      {
+        "id": "food_oats",
+        "name": "燕麦",
+        "type": "food",
+        "aliases": [
+          "燕麦片"
+        ],
+        "description": "谷物类食材，可与其他主食轮换；购买时区分原味与加糖产品。",
+        "properties": {
+          "食用方式": "煮粥或与牛奶、无糖酸奶搭配",
+          "搭配原则": "食物多样，留意过敏与个人耐受；特殊疾病的饮食限制遵医嘱。",
+          "注意事项": "普通食物不能替代疾病治疗，不将单一食物宣传为补药。",
+          "通用膳食参考": "https://www.nhc.gov.cn/xcs/c100123/202405/73a4927142f34152abed875634a3c13b.shtml"
+        }
+      },
+      {
+        "id": "food_brown_rice",
+        "name": "糙米",
+        "type": "food",
+        "aliases": [
+          "全谷米"
+        ],
+        "description": "保留较多谷物外层的米类，可逐步与精白米搭配。",
+        "properties": {
+          "食用方式": "提前浸泡、充分煮熟",
+          "搭配原则": "食物多样，留意过敏与个人耐受；特殊疾病的饮食限制遵医嘱。",
+          "注意事项": "普通食物不能替代疾病治疗，不将单一食物宣传为补药。",
+          "通用膳食参考": "https://www.nhc.gov.cn/xcs/c100123/202405/73a4927142f34152abed875634a3c13b.shtml"
+        }
+      },
+      {
+        "id": "food_sweet_potato",
+        "name": "红薯",
+        "type": "food",
+        "aliases": [
+          "甘薯",
+          "地瓜"
+        ],
+        "description": "薯类食材，可替代一部分主食，不宜把它当作额外甜点无限增加。",
+        "properties": {
+          "食用方式": "蒸煮后与其他食物搭配",
+          "搭配原则": "食物多样，留意过敏与个人耐受；特殊疾病的饮食限制遵医嘱。",
+          "注意事项": "普通食物不能替代疾病治疗，不将单一食物宣传为补药。",
+          "通用膳食参考": "https://www.nhc.gov.cn/xcs/c100123/202405/73a4927142f34152abed875634a3c13b.shtml"
+        }
+      },
+      {
+        "id": "food_carrot",
+        "name": "胡萝卜",
+        "type": "food",
+        "aliases": [
+          "红萝卜"
+        ],
+        "description": "常见蔬菜，用于增加餐盘的食物种类。",
+        "properties": {
+          "食用方式": "洗净后蒸煮、炖汤",
+          "搭配原则": "食物多样，留意过敏与个人耐受；特殊疾病的饮食限制遵医嘱。",
+          "注意事项": "普通食物不能替代疾病治疗，不将单一食物宣传为补药。",
+          "通用膳食参考": "https://www.nhc.gov.cn/xcs/c100123/202405/73a4927142f34152abed875634a3c13b.shtml"
+        }
+      },
+      {
+        "id": "food_broccoli",
+        "name": "西兰花",
+        "type": "food",
+        "aliases": [
+          "青花菜"
+        ],
+        "description": "蔬菜类食材，适合与其他颜色蔬菜搭配。",
+        "properties": {
+          "食用方式": "清洗并充分烹调",
+          "搭配原则": "食物多样，留意过敏与个人耐受；特殊疾病的饮食限制遵医嘱。",
+          "注意事项": "普通食物不能替代疾病治疗，不将单一食物宣传为补药。",
+          "通用膳食参考": "https://www.nhc.gov.cn/xcs/c100123/202405/73a4927142f34152abed875634a3c13b.shtml"
+        }
+      },
+      {
+        "id": "food_apple",
+        "name": "苹果",
+        "type": "food",
+        "aliases": [],
+        "description": "常见水果，不能代替正餐或药物。",
+        "properties": {
+          "食用方式": "洗净后食用，注意咀嚼",
+          "搭配原则": "食物多样，留意过敏与个人耐受；特殊疾病的饮食限制遵医嘱。",
+          "注意事项": "普通食物不能替代疾病治疗，不将单一食物宣传为补药。",
+          "通用膳食参考": "https://www.nhc.gov.cn/xcs/c100123/202405/73a4927142f34152abed875634a3c13b.shtml"
+        }
+      },
+      {
+        "id": "food_pear",
+        "name": "梨",
+        "type": "food",
+        "aliases": [
+          "雪梨"
+        ],
+        "description": "常见水果；食用水果与治疗咳嗽不是同一件事。",
+        "properties": {
+          "食用方式": "按个人耐受选择，不额外添加大量糖",
+          "搭配原则": "食物多样，留意过敏与个人耐受；特殊疾病的饮食限制遵医嘱。",
+          "注意事项": "普通食物不能替代疾病治疗，不将单一食物宣传为补药。",
+          "通用膳食参考": "https://www.nhc.gov.cn/xcs/c100123/202405/73a4927142f34152abed875634a3c13b.shtml"
+        }
+      },
+      {
+        "id": "food_egg",
+        "name": "鸡蛋",
+        "type": "food",
+        "aliases": [],
+        "description": "常用蛋类食材，食用前应充分加热。",
+        "properties": {
+          "食用方式": "煮蛋、蒸蛋；已知过敏者避免",
+          "搭配原则": "食物多样，留意过敏与个人耐受；特殊疾病的饮食限制遵医嘱。",
+          "注意事项": "普通食物不能替代疾病治疗，不将单一食物宣传为补药。",
+          "通用膳食参考": "https://www.nhc.gov.cn/xcs/c100123/202405/73a4927142f34152abed875634a3c13b.shtml"
+        }
+      },
+      {
+        "id": "food_tofu",
+        "name": "豆腐",
+        "type": "food",
+        "aliases": [],
+        "description": "豆制品的一种，可用于丰富蛋白质食物来源。",
+        "properties": {
+          "食用方式": "炖煮、蒸制；注意大豆过敏",
+          "搭配原则": "食物多样，留意过敏与个人耐受；特殊疾病的饮食限制遵医嘱。",
+          "注意事项": "普通食物不能替代疾病治疗，不将单一食物宣传为补药。",
+          "通用膳食参考": "https://www.nhc.gov.cn/xcs/c100123/202405/73a4927142f34152abed875634a3c13b.shtml"
+        }
+      },
+      {
+        "id": "food_milk",
+        "name": "牛奶",
+        "type": "food",
+        "aliases": [],
+        "description": "奶类饮品；乳糖不耐受与牛奶蛋白过敏需要区分。",
+        "properties": {
+          "食用方式": "按个人耐受选择合适奶类",
+          "搭配原则": "食物多样，留意过敏与个人耐受；特殊疾病的饮食限制遵医嘱。",
+          "注意事项": "普通食物不能替代疾病治疗，不将单一食物宣传为补药。",
+          "通用膳食参考": "https://www.nhc.gov.cn/xcs/c100123/202405/73a4927142f34152abed875634a3c13b.shtml"
+        }
+      },
+      {
+        "id": "food_yogurt",
+        "name": "酸奶",
+        "type": "food",
+        "aliases": [],
+        "description": "发酵乳制品，选购时注意产品类别与添加糖。",
+        "properties": {
+          "食用方式": "冷藏保存，按标签期限食用",
+          "搭配原则": "食物多样，留意过敏与个人耐受；特殊疾病的饮食限制遵医嘱。",
+          "注意事项": "普通食物不能替代疾病治疗，不将单一食物宣传为补药。",
+          "通用膳食参考": "https://www.nhc.gov.cn/xcs/c100123/202405/73a4927142f34152abed875634a3c13b.shtml"
+        }
+      },
+      {
+        "id": "food_fish",
+        "name": "鱼类",
+        "type": "food",
+        "aliases": [
+          "鱼肉"
+        ],
+        "description": "水产食材的一类，需留意鱼刺、过敏及食品卫生。",
+        "properties": {
+          "食用方式": "充分熟制，蒸煮为常见方式",
+          "搭配原则": "食物多样，留意过敏与个人耐受；特殊疾病的饮食限制遵医嘱。",
+          "注意事项": "普通食物不能替代疾病治疗，不将单一食物宣传为补药。",
+          "通用膳食参考": "https://www.nhc.gov.cn/xcs/c100123/202405/73a4927142f34152abed875634a3c13b.shtml"
+        }
+      }
+    ],
+    "organs": [
+      {
+        "id": "org_small_intestine",
+        "name": "小肠",
+        "type": "organ",
+        "description": "传统脏腑术语涉及受盛、化物等概念。",
+        "properties": {
+          "学习边界": "中医脏腑是传统功能概念，不与现代解剖器官一一等同。",
+          "观察提示": "症状可跨系统出现，不根据名称直接定位器官疾病。",
+          "资料性质": "传统术语教学补充，非解剖学或诊断标准"
+        }
+      },
+      {
+        "id": "org_large_intestine",
+        "name": "大肠",
+        "type": "organ",
+        "description": "传统脏腑术语涉及传导糟粕等概念。",
+        "properties": {
+          "学习边界": "中医脏腑是传统功能概念，不与现代解剖器官一一等同。",
+          "观察提示": "症状可跨系统出现，不根据名称直接定位器官疾病。",
+          "资料性质": "传统术语教学补充，非解剖学或诊断标准"
+        }
+      },
+      {
+        "id": "org_gallbladder",
+        "name": "胆",
+        "type": "organ",
+        "description": "传统脏腑体系中的六腑之一。",
+        "properties": {
+          "学习边界": "中医脏腑是传统功能概念，不与现代解剖器官一一等同。",
+          "观察提示": "症状可跨系统出现，不根据名称直接定位器官疾病。",
+          "资料性质": "传统术语教学补充，非解剖学或诊断标准"
+        }
+      },
+      {
+        "id": "org_bladder",
+        "name": "膀胱",
+        "type": "organ",
+        "description": "传统脏腑术语涉及贮尿、排尿等概念。",
+        "properties": {
+          "学习边界": "中医脏腑是传统功能概念，不与现代解剖器官一一等同。",
+          "观察提示": "症状可跨系统出现，不根据名称直接定位器官疾病。",
+          "资料性质": "传统术语教学补充，非解剖学或诊断标准"
+        }
+      }
+    ]
+  },
+  "patches": {
+    "sym_insomnia": {
+      "日常管理": [
+        "尽量固定起床和入睡时间",
+        "睡前减少咖啡因、饮酒和强光刺激",
+        "保持安静、适宜温度的睡眠环境"
+      ],
+      "观察要点": "入睡耗时、夜间醒来次数、白天精神与持续时间",
+      "参考来源": "https://www.nhlbi.nih.gov/health/sleep-deprivation/healthy-sleep-habits"
+    },
+    "sym_constipation": {
+      "日常管理": [
+        "逐步增加膳食纤维",
+        "在无医嘱限制时配合适量饮水",
+        "保持适度活动和规律排便习惯"
+      ],
+      "观察要点": "排便频率、大便形态、是否费力或带血",
+      "参考来源": "https://www.niddk.nih.gov/health-information/digestive-diseases/constipation/treatment"
+    },
+    "sym_heartburn": {
+      "日常管理": [
+        "记录个人诱发食物，不盲目禁食所有食物",
+        "夜间反流者可尝试在躺下前至少三小时结束进餐"
+      ],
+      "参考来源": "https://www.niddk.nih.gov/health-information/digestive-diseases/acid-reflux-ger-gerd-adults/eating-diet-nutrition"
+    },
+    "sym_fatigue": {
+      "观察要点": "睡眠、活动量、饮食变化、用药以及是否伴其他不适"
+    },
+    "sym_headache": {
+      "观察要点": "部位、性质、强度、出现频率和可能诱因"
+    },
+    "sym_dizziness": {
+      "观察要点": "是旋转感、站起时发晕还是不稳；记录持续时间"
+    },
+    "sym_poor_appetite": {
+      "观察要点": "进食量、持续时间、近期体重与伴随恶心或腹痛"
+    },
+    "sym_bloating": {
+      "观察要点": "餐前餐后变化、排便习惯以及是否有腹痛"
+    },
+    "sym_loose_stool": {
+      "观察要点": "大便形态、频率、食物变化与是否伴发热"
+    },
+    "sym_dry_mouth": {
+      "观察要点": "饮水、口呼吸、用药和口腔情况"
+    },
+    "sym_night_sweat": {
+      "观察要点": "是否浸湿衣被、室温和寝具厚度、是否伴发热"
+    },
+    "sym_palpitation": {
+      "观察要点": "发作时间、持续多久、运动或咖啡因关联以及伴随不适"
+    },
+    "sym_menstrual_pain": {
+      "观察要点": "与月经的时间关系、疼痛程度、出血变化及对生活的影响"
+    },
+    "sym_irregular_period": {
+      "观察要点": "周期、经期天数、出血量变化及妊娠可能性"
+    }
+  }
+}

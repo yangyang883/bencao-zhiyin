@@ -1,0 +1,34 @@
+[
+  {
+    "case": "sample2",
+    "status": 503,
+    "result": {
+      "error": "细分类输出不完整，请重试"
+    },
+    "seconds": 8.15
+  },
+  {
+    "case": "sample3",
+    "status": 503,
+    "result": {
+      "error": "细分类输出不完整，请重试"
+    },
+    "seconds": 6.92
+  },
+  {
+    "case": "blank",
+    "status": 503,
+    "result": {
+      "error": "图片接近纯色或没有可辨细节，请重新拍摄"
+    },
+    "seconds": 0.01
+  },
+  {
+    "case": "shapes",
+    "status": 503,
+    "result": {
+      "error": "图片不适合细分类，请上传清晰、完整的舌面照片"
+    },
+    "seconds": 5.19
+  }
+]

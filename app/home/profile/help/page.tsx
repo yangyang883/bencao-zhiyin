@@ -1,0 +1,3 @@
+import { PageShell } from '@/components/page-shell'
+import Link from 'next/link'
+export default function HelpPage(){return <PageShell title="使用帮助"><section className="space-y-4"><h2 className="font-semibold">拍照与语音</h2><p>请在设备本机使用 localhost 地址，或通过 HTTPS 打开程序。首次使用时允许摄像头和麦克风权限。</p><p>语音输入：点击麦克风，开始录音，停止并识别后确认发送。回答可自动播报，也可点击播报回复或停止播报。</p><h2 className="font-semibold">在线服务错误</h2><p>出现账户欠费提示时，需要恢复阿里云账户。模型权限不足时，请检查密钥、模型名称及开通状态。离线时本地知识库仍可提供有限参考回复。</p><h2 className="font-semibold">数据保留</h2><p>档案、报告、收藏保存在当前浏览器，使用同一个地址及浏览器访问。定期在数据与隐私中导出备份。</p><Link className="underline" href="/home/profile/device">打开设备检测</Link></section></PageShell>}
