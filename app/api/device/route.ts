@@ -9,11 +9,12 @@ async function offlineStatus() {
   const names = new Set((Array.isArray(tags?.models) ? tags.models : []).map((m: { name: string }) => m.name))
   const baseReady = health?.ok === true
   const visionInstalled = names.has('qwen3-vl:2b')
+  const detectorReady = baseReady && health?.model === 'YOLOv8n十类外观检测'
   return { mode: 'offline', configured: baseReady, speech: health?.speech === true,
-    capabilities: { baseReady, visionInstalled, chatInstalled: names.has('qwen3:0.6b') },
+    capabilities: { baseReady, detectorReady, visionInstalled, chatInstalled: names.has('qwen3:0.6b') },
     models: { chat: names.has('qwen3:0.6b') ? '本地通义已安装（需实际问答验收）' : '本地知识库问答',
-      vision: `八项识别：${visionInstalled ? '模型已安装，需实际图片验收' : '缺少视觉模型'}；三分类：${baseReady ? '已就绪' : '未就绪'}`,
-      asr: '未启用，请使用文字输入', tts: health?.speech ? '本地中文语音已安装，需试听' : '本地语音服务未就绪' } }
+      vision: `${baseReady ? health?.model || '本地图像模型' : '本地图像服务未就绪'}；通义视觉：${visionInstalled ? '已安装，需实测' : '未安装'}`,
+      asr: health?.asr?.installed && health?.asr?.model_present ? 'Vosk中文离线模型已安装，需麦克风实测' : '离线识别模型未就绪，请使用文字输入', tts: health?.speech ? '本地中文语音已安装，需试听' : '本地语音服务未就绪' } }
 }
 export async function GET() {
   if (isOffline()) {
@@ -28,7 +29,7 @@ export async function POST(req: Request) {
   try {
     if (isOffline()) {
       const status = await offlineStatus()
-      return Response.json({ ok: status.configured && status.capabilities.visionInstalled,
+      return Response.json({ ok: status.configured && (status.capabilities.detectorReady || status.capabilities.visionInstalled),
         message: Object.values(status.models).join('；') }, { status: status.configured ? 200 : 503 })
     }
     await cloudJSON(chatURL, { model: process.env.DASHSCOPE_CHAT_MODEL || 'qwen-plus', messages: [{ role: 'user', content: '连通性检查，请回复 OK' }], max_tokens: 8 }, req.signal)

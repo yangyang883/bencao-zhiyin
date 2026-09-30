@@ -2,6 +2,7 @@ import { tongueTerminologyContext } from '@/lib/knowledge-graph/tongue-terms'
 import { chatURL } from '@/lib/cloud'
 import { z } from 'zod'
 import { isOffline, localService } from '@/lib/offline'
+import { detectorLabels } from '@/lib/tongue-advice'
 
 export const maxDuration = 60
 const analysisSchema = z.object({
@@ -11,6 +12,13 @@ const analysisSchema = z.object({
   suggestions: z.array(z.string()).min(1),
   details: z.array(z.object({ category: z.string(), status: z.string(), description: z.string() })).min(1),
 })
+const localAnalysisSchema = z.discriminatedUnion('source', [
+  analysisSchema.extend({ source: z.literal('local-resnet18') }),
+  analysisSchema.extend({ source: z.literal('local-yolov8n'), detections: z.array(z.object({
+    label: z.enum(detectorLabels), model_score: z.number().finite().min(0).max(1),
+    xyxy: z.tuple([z.number().finite().nonnegative(), z.number().finite().nonnegative(), z.number().finite().nonnegative(), z.number().finite().nonnegative()]),
+  })).max(300) }),
+])
 
 const systemPrompt = `你是一位专业的中医舌诊专家，擅长通过舌象分析来评估人体健康状况。
 
@@ -56,8 +64,8 @@ export async function POST(req: Request) {
   if (isOffline()) {
     try {
       const result = await (await localService('/analyze', { image }, req.signal)).json()
-      const validated = analysisSchema.parse(result)
-      return Response.json({ ...validated, source: 'local-resnet18' }, { headers: { 'Cache-Control': 'no-store' } })
+      const validated = localAnalysisSchema.parse(result)
+      return Response.json(validated, { headers: { 'Cache-Control': 'no-store' } })
     } catch (error) {
       return Response.json({ error: error instanceof Error && !error.message.includes('fetch failed') ? error.message : '本地模型服务未启动，请启动 offline/server.py；不会调用云端' }, { status: 503 })
     }

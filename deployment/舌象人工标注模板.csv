@@ -1,2 +1,0 @@
-﻿image_id,subject_id,image_path,split,reviewer,image_quality,body_color,body_shape,tooth_marks,fissures,coat_color,coat_thickness,coat_texture,peeling,source,license,notes
-示例_请替换,同一人使用相同匿名编号,样本相对路径,train/val/test,标注者代号,可观察/不清晰/非舌象/无法判断,无法判断,无法判断,无法判断,无法判断,无法判断,无法判断,无法判断,无法判断,来源与授权记录,许可名称,此行为模板，不是真实标注

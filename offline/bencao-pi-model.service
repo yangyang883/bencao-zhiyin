@@ -1,0 +1,13 @@
+[Unit]
+Description=Bencao offline model service on Raspberry Pi
+After=network.target
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi/bencao-device/offline
+Environment=BENCAO_CSI=1
+ExecStart=/usr/bin/python3 /home/pi/bencao-device/offline/server.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

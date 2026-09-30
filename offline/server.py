@@ -13,12 +13,11 @@ import traceback
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from asr import recognize, status as asr_status, ASRUnavailable
 
-import torch
-from torchvision import models, transforms
 from PIL import Image, ImageOps, ImageStat
 
 ROOT = Path(__file__).resolve().parent
 CLASSES = ['黑舌', '紫舌', '白舌']
+BACKEND = os.environ.get('BENCAO_TONGUE_MODEL', 'yolo')
 Image.MAX_IMAGE_PIXELS = 20000000
 
 
@@ -73,6 +72,8 @@ def check_visual_input(value):
 
 
 def load_model():
+    import torch
+    from torchvision import models, transforms
     torch.set_num_threads(2)
     # Nano's CUDA context consumed ~2.5GB in testing; CPU leaves room for the UI and Qwen.
     device = torch.device(os.environ.get('BENCAO_MODEL_DEVICE', 'cpu'))
@@ -106,7 +107,7 @@ class Handler(BaseHTTPRequestHandler):
         if self.path != '/health':
             self.send(404, {'error': '接口不存在'})
             return
-        self.send(200, {'ok': True, 'model': 'ResNet18三分类', 'classes': CLASSES,
+        self.send(200, {'ok': True, 'model': self.server.model_name, 'classes': self.server.classes,
                         'device': str(self.server.device), 'speech': bool(shutil.which('espeak-ng')),
                         'asr': asr_status(), 'mode': 'offline'})
 
@@ -126,20 +127,27 @@ class Handler(BaseHTTPRequestHandler):
                 self.send(200, check_visual_input(data.get('image')))
             elif self.path == '/analyze':
                 image = read_image(data.get('image'))
-                tensor = self.server.transform(image).unsqueeze(0).to(self.server.device)
-                with torch.no_grad():
-                    probabilities = torch.softmax(self.server.model(tensor), dim=1)[0].cpu().tolist()
-                self.send(200, make_report(probabilities))
+                if BACKEND == 'yolo':
+                    self.send(200, self.server.model.analyze(image))
+                else:
+                    import torch
+                    tensor = self.server.transform(image).unsqueeze(0).to(self.server.device)
+                    with torch.no_grad():
+                        probabilities = torch.softmax(self.server.model(tensor), dim=1)[0].cpu().tolist()
+                    self.send(200, make_report(probabilities))
             elif self.path == '/capture':
                 if os.environ.get('BENCAO_CSI') != '1':
                     self.send(503, {'error': '此设备未启用排线摄像头，请使用上传图片'})
                     return
                 with tempfile.TemporaryDirectory(prefix='bencao-camera-') as folder:
                     target = os.path.join(folder, 'capture.jpg')
-                    subprocess.run(['gst-launch-1.0', '-q', 'nvarguscamerasrc', 'num-buffers=1', '!',
-                                    'video/x-raw(memory:NVMM),width=1280,height=720,framerate=30/1', '!',
-                                    'nvvidconv', '!', 'video/x-raw,format=I420', '!', 'jpegenc', '!',
-                                    'filesink', 'location=' + target], stdout=subprocess.PIPE,
+                    command = (['rpicam-still', '-n', '-t', '1000', '--width', '1280', '--height', '720', '-o', target]
+                               if shutil.which('rpicam-still') else
+                               ['gst-launch-1.0', '-q', 'nvarguscamerasrc', 'num-buffers=1', '!',
+                                'video/x-raw(memory:NVMM),width=1280,height=720,framerate=30/1', '!',
+                                'nvvidconv', '!', 'video/x-raw,format=I420', '!', 'jpegenc', '!',
+                                'filesink', 'location=' + target])
+                    subprocess.run(command, stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE, timeout=25, check=True)
                     encoded = 'data:image/jpeg;base64,' + base64.b64encode(Path(target).read_bytes()).decode('ascii')
                     read_image(encoded)
@@ -169,9 +177,18 @@ class Handler(BaseHTTPRequestHandler):
 
 
 if __name__ == '__main__':
-    model, device, transform = load_model()
+    if BACKEND == 'yolo':
+        from detector import TongueDetector, NAMES
+        model = TongueDetector(ROOT / 'models' / 'tongue-yolov8n.onnx')
+        device, transform, model_name, classes = 'cpu', None, 'YOLOv8n十类外观检测', NAMES
+    elif BACKEND == 'resnet':
+        model, device, transform = load_model()
+        model_name, classes = 'ResNet18三分类', CLASSES
+    else:
+        raise ValueError('BENCAO_TONGUE_MODEL must be yolo or resnet')
     # Single request at a time bounds Jetson memory usage; no network dependencies.
-    server = HTTPServer(('127.0.0.1', 8765), Handler)
+    server = HTTPServer(('127.0.0.1', int(os.environ.get('BENCAO_PORT', '8765'))), Handler)
     server.model, server.device, server.transform = model, device, transform
-    print('Offline service ready on 127.0.0.1:8765 (' + str(device) + ')', flush=True)
+    server.model_name, server.classes = model_name, classes
+    print('Offline service ready: ' + model_name + ' (' + str(device) + ')', flush=True)
     server.serve_forever()

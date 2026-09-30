@@ -61,6 +61,7 @@ export function TongueResult({ image, analysis, onReset, onRefine }: TongueResul
       className="space-y-6 pb-8"
     >
       {/* 结果概览 */}
+      {analysis.source === 'local-yolov8n' && <section className="rounded-xl border p-4 space-y-2"><p className="font-semibold">新训练的十类外观模型 · 离线运行</p><p className="text-sm">结果待人工核对。未检出不等于正常，模型分数不是医学准确率；未训练的观察项目不会自动补齐。</p></section>}
       {analysis.source === 'local-qwen-vl' && <section className="rounded-xl border p-4 space-y-2"><p className="font-semibold">本地视觉细分类 · 待人工核对</p><p className="text-sm">8项外观分别记录，无法判断的项目保留未知。通用视觉模型尚未经过舌象专科验证，不能作诊断或体质判断。</p></section>}
       {analysis.source === 'local-resnet18' && <section className="rounded-xl border p-4 space-y-2">
         <p>三分类模型演示，不能判断疾病或体质。模型分数不代表医学准确率。</p>
@@ -86,7 +87,7 @@ export function TongueResult({ image, analysis, onReset, onRefine }: TongueResul
               </span>
             </div>
             <h2 className="text-xl font-semibold text-foreground mb-1">
-              {analysis.source === 'local-qwen-vl' ? '舌象外观细分类' : analysis.source === 'local-resnet18' ? '本地模型分类演示' : `体质参考：${analysis.constitution}`}
+              {analysis.source === 'local-yolov8n' ? '十类舌象外观检测' : analysis.source === 'local-qwen-vl' ? '舌象外观细分类' : analysis.source === 'local-resnet18' ? '本地模型分类演示' : `体质参考：${analysis.constitution}`}
             </h2>
             <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
               <span>舌色：{analysis.tongueColor}</span>

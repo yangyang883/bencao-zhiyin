@@ -73,9 +73,19 @@ const req = body => new Request('http://localhost/api/test', { method: 'POST', h
  const online=await chat(req({messages:[{role:'user',content:'测试'}]}));assert.equal(online.headers.get('X-Reply-Source'),'cloud');assert.match(await online.text(),/测试成功/)
  delete env.BENCAO_MODE // 默认必须离线，即使还保留着云端密钥。
  let requests=0
- upstream=async url=>{requests++;assert.match(String(url),/^http:\/\/127\.0\.0\.1:8765\//);return Response.json({...analysis,class_name:'紫舌',confidence:0.9})}
+ upstream=async url=>{requests++;assert.match(String(url),/^http:\/\/127\.0\.0\.1:8765\//);return Response.json({...analysis,source:'local-resnet18',class_name:'紫舌',confidence:0.9})}
  const localAnalysis=await (await tongue(req({image}))).json()
  assert.equal(localAnalysis.source,'local-resnet18');assert.equal(localAnalysis.confidence,0.9)
+ const legacyUpstream=upstream
+ const yolo={...analysis,source:'local-yolov8n',detections:[{label:'white_coating',model_score:0.9,xyxy:[1,2,30,40]}]}
+ upstream=async ()=>Response.json(yolo)
+ const detected=await (await tongue(req({image}))).json()
+ assert.equal(detected.source,'local-yolov8n');assert.equal(detected.detections[0].label,'white_coating')
+ assert.match(reports.generateTongueReportContent(detected),/十类舌象外观检测/)
+ assert.equal(reports.analyzeStatus(detected),'warning')
+ upstream=async ()=>Response.json({...yolo,detections:[{label:'unknown',model_score:0.9,xyxy:[1,2,3,4]}]})
+ assert.equal((await tongue(req({image}))).status,503)
+ upstream=legacyUpstream
  assert.match(reports.generateTongueReportContent(localAnalysis),/模型演示/)
  assert.doesNotMatch(reports.generateTongueReportContent(localAnalysis),/舌形正常/)
  const before=requests

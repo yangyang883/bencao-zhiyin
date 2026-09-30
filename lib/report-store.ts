@@ -128,6 +128,7 @@ export function generateReportId(): string {
 
 // 根据舌诊分析生成报告内容
 export function generateTongueReportContent(analysis: TongueAnalysis): string {
+  if (analysis.source === 'local-yolov8n') return ['本草知音十类舌象外观检测（离线，待人工核对）', analysis.tongueColor, analysis.tongueShape, analysis.coating, ...analysis.details.map(d => `${d.category}：${d.description}`), ...analysis.suggestions, analysis.constitution].join('\n\n')
   if (analysis.source === 'local-qwen-vl') return ['本草知音舌象外观细分类（试验，待人工核对）', ...analysis.details.map(d => `${d.category}：${d.description}`), ...analysis.suggestions, analysis.constitution].join('\n\n')
   if (analysis.source === 'local-resnet18') return [
     '本草知音离线模型演示报告', analysis.tongueColor,
@@ -166,6 +167,7 @@ ${analysis.details.map(d => `• ${d.category}（${d.status}）：${d.descriptio
 
 // 根据舌诊分析判断状态
 export function analyzeStatus(analysis: TongueAnalysis): 'good' | 'warning' | 'attention' {
+  if (analysis.source === 'local-yolov8n') return 'warning'
   if (analysis.source === 'local-qwen-vl') return 'warning'
   if (analysis.source === 'local-resnet18') return 'warning'
   const normalStatuses = analysis.details.filter(d => d.status === '正常').length
@@ -192,7 +194,7 @@ export function createTongueReport(analysis: TongueAnalysis, imageUrl?: string):
     title: '舌诊分析报告',
     date,
     time,
-    summary: analysis.source === 'local-qwen-vl' ? `舌象外观细分类（待核对）：${analysis.tongueColor}` : analysis.source === 'local-resnet18' ? `离线模型演示：${analysis.tongueColor}` : `体质：${analysis.constitution}，舌象：${analysis.tongueColor}`,
+    summary: analysis.source === 'local-yolov8n' ? `十类外观检测（待核对）：${analysis.tongueColor}；${analysis.coating}` : analysis.source === 'local-qwen-vl' ? `舌象外观细分类（待核对）：${analysis.tongueColor}` : analysis.source === 'local-resnet18' ? `离线模型演示：${analysis.tongueColor}` : `体质：${analysis.constitution}，舌象：${analysis.tongueColor}`,
     status: analyzeStatus(analysis),
     content: generateTongueReportContent(analysis),
     imageUrl: getSettings().savePhotos ? imageUrl : undefined,

@@ -15,7 +15,7 @@ type AnalysisStep = 'intro' | 'camera' | 'preview' | 'analyzing' | 'result'
 
 export default function TonguePage() {
   const [step, setStep] = useState<AnalysisStep>('intro')
-  const [fine, setFine] = useState(true)
+  const [fine, setFine] = useState(false)
   const [capturedImage, setCapturedImage] = useState<string | null>(null)
   const [analysis, setAnalysis] = useState<TongueAnalysis | null>(null)
   const [savedReportId, setSavedReportId] = useState<string | null>(null)
@@ -103,8 +103,8 @@ export default function TonguePage() {
       <main className="px-4 py-6">
         {step === 'intro' && <a href="/home/tongue/advice" className="mb-4 block rounded-xl border bg-card p-4 underline">暂不拍照，先填写不适并获取离线健康建议</a>}
         {step === 'intro' && <section className="mb-4 rounded-xl border p-4 space-y-3">
-          <label className="block space-y-2"><span className="font-semibold">选择分析方式</span><select className="block w-full rounded border bg-background p-2" value={fine ? 'fine' : 'legacy'} onChange={e => setFine(e.target.value === 'fine')}><option value="fine">8项舌象外观分析（本地视觉模型·试验）</option><option value="legacy">旧三分类对照（不识别舌形、舌苔）</option></select></label>
-          <p className="text-sm text-muted-foreground">默认分别观察8项外观，需人工核对。失败时会提示原因，不会自动退回旧三分类。电脑试验功能，设备尚未验证。</p>
+          <label className="block space-y-2"><span className="font-semibold">选择分析方式</span><select className="block w-full rounded border bg-background p-2" value={fine ? 'fine' : 'detector'} onChange={e => setFine(e.target.value === 'fine')}><option value="detector">新训练模型：十类舌象外观检测（离线）</option><option value="fine">通义视觉：8项外观分析（电脑试验，设备未验证）</option></select></label>
+          <p className="text-sm text-muted-foreground">默认使用新训练的十类模型：红舌、紫舌、胖大、瘦薄、红点、裂纹、齿痕、白苔、黄苔、黑苔。结果待人工核对，未检出不等于正常；未训练项目保持未知。</p>
           <details><summary className="cursor-pointer">查看分类与观察要点</summary><ul className="mt-2 space-y-2 text-sm">{tongueFeatures.map(f => <li key={f.key}><strong>{f.name}：</strong>{f.values.join('、')}、无法判断。{f.note}</li>)}</ul>
             <p className="mt-2 text-xs">项目观察分类，非国家标准原文。参考：<a className="underline" href="https://dep.mohw.gov.tw/DOCMAP/fp-772-5723-108.html" target="_blank" rel="noopener noreferrer">中医药司《望舌》</a>、<a className="underline" href="https://github.com/tonguedx/tonguedx" target="_blank" rel="noopener noreferrer">TongueDx</a>。资料用于定义观察维度，不能替代模型训练和准确率验证。</p>
           </details>
@@ -127,7 +127,7 @@ export default function TonguePage() {
             <h2 className="text-lg font-semibold">先确认照片</h2>
             <img src={capturedImage} alt="待分析的原始照片" className="max-h-[55vh] w-full object-contain rounded-xl bg-muted" />
             <p className="text-sm">确认舌面清晰、舌尖和两侧完整；尽量拍近照，避免整张人脸占据主要画面。</p>
-            <p className="text-sm text-muted-foreground">本次使用：{fine ? '8项本地视觉细分类（试验）' : '旧三分类对照'}。照片在本机分析。</p>
+            <p className="text-sm text-muted-foreground">本次使用：{fine ? '8项本地视觉细分类（试验）' : '新训练的十类外观检测模型'}。照片在本机分析。</p>
             <div className="flex gap-3"><Button variant="outline" onClick={() => setStep('camera')}>重新选图或拍照</Button><Button onClick={() => void handleCapture(capturedImage)}>确认并开始分析</Button></div>
           </section>}
           {step === 'analyzing' && (

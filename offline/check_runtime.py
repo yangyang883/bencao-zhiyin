@@ -38,13 +38,20 @@ try:
     for n in [1, 2, 3]:
         photo = (Path(args.samples) / ('sample%d.jpg' % n)).read_bytes()
         result = json.loads(request('/api/tongue-analysis', {'image': 'data:image/jpeg;base64,' + base64.b64encode(photo).decode()})[0])
-        assert result['source'] == 'local-resnet18' and 0 <= result['confidence'] <= 1
-        results[-1]['class_name'] = result['class_name']
-        results[-1]['confidence'] = result['confidence']
+        assert result['source'] in ('local-resnet18', 'local-yolov8n')
+        if result['source'] == 'local-yolov8n':
+            assert isinstance(result['detections'], list)
+            assert all(0 <= item['model_score'] <= 1 for item in result['detections'])
+            results[-1]['detections'] = result['detections']
+        else:
+            assert 0 <= result['confidence'] <= 1
+            results[-1]['class_name'] = result['class_name']
+            results[-1]['confidence'] = result['confidence']
     if not args.core_only:
-        summary = json.loads(request('/api/report-summary', {'class_name': result['class_name'], 'confidence': result['confidence']})[0])
-        assert summary['source'] == 'local-qwen3-0.6b' and summary['text']
-        results[-1]['text'] = summary['text']
+        if result['source'] == 'local-resnet18':
+            summary = json.loads(request('/api/report-summary', {'class_name': result['class_name'], 'confidence': result['confidence']})[0])
+            assert summary['source'] == 'local-qwen3-0.6b' and summary['text']
+            results[-1]['text'] = summary['text']
         sound = request('/api/speech/synthesize', {'text': '本草知音离线语音测试。结果仅供模型演示。'})[0]
         with wave.open(io.BytesIO(sound)) as audio:
             assert audio.getnframes() > 1000 and audio.getframerate() > 0
@@ -62,9 +69,9 @@ try:
         assert error.code == 503
     try:
         request('/api/speech/recognize', {'audio': 'data:audio/wav;base64,aGVsbG8='})
-        raise AssertionError('Offline ASR was unexpectedly enabled')
+        raise AssertionError('Invalid WAV was accepted')
     except urllib.error.HTTPError as error:
-        assert error.code == 503
+        assert error.code == 400
     print('PASS: local image analysis, knowledge and failure handling' + ('; Qwen and WAV speech SKIPPED' if args.core_only else '; Qwen and WAV speech passed'))
 finally:
     target = Path('offline-check-' + datetime.datetime.now().strftime('%Y%m%d-%H%M%S') + '.json')

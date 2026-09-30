@@ -1,0 +1,17 @@
+[Unit]
+Description=Bencao offline web service on Raspberry Pi
+After=bencao-pi-model.service
+Wants=bencao-pi-model.service
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi/bencao-device/web
+Environment=BENCAO_MODE=offline
+Environment=HOSTNAME=127.0.0.1
+Environment=PORT=3100
+Environment=NEXT_TELEMETRY_DISABLED=1
+ExecStart=/usr/bin/node /home/pi/bencao-device/web/server.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
